@@ -1,0 +1,39 @@
+spring (service, controller)
+
+- Service 
+ DB에서 받아온 데이터를 전달받아 가공
+
+ id="selectUploadList"  이거를 가지고 service에서 selectSession.selectList("UploadMarketPlace.selectUploadList") 불러와 
+ 값을 List<Map<String, Object>> 담아서 return -> uploadList
+- XML 
+<mapper namespace="UploadMarketPlace">
+<select id="selectUploadList" resultType="casemap">
+(쿼리문~~~)
+
+	
+
+- Controller
+시스템으로 들어오는 요청과 응답을 담당
+	@Autowired MarketplaceUploadService marketplaceUploadService;
+
+
+params.makePageScope();
+
+makePageScope() 함수에서 페이징 범위 파라미터 생성 
+
+HttpServletRequest  만약 회원 정보를 컨트롤러로 보냈을 때 HttpServletRequest 객체 안에 모든 데이터들이 들어가게 됩니다
+@PathVariable 이란?
+ex)http://localhost:8080/api/user/1234
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+/* var referrer = document.referrer.split('/')[4]; */
+		var referrer = document.referrer
+		$("#toList").on("click", function(){
+			/* window.location.href ="javascript:history.go(-1)"; */
+			window.location.href =referrer;
+			/* if(referrer == "search") {
+				window.location.href = "/marketplace/search/";
+			} else {
+				window.location.href = "/marketplace/upload/";
+			} */

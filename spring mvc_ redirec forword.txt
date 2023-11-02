@@ -1,0 +1,29 @@
+- redirect
+클라이언트에게 요청할 주소를 응답 결과로 전달하는 것을 의미
+직접 서버에 요청
+
+
+- forward
+코드의 흐름을 서버상에서만 이동하는 것을 의미
+주소창의 주소는 변경되지 않는다.
+HttpSevletRequest, HttpSession 객체 모두 유지된다.
+
+form 요소 
+ select, option, options, checkbox, checkboxs, radiobutton, radiobuttons
+ 
+<form:radiobutton>, <form:radiobuttons>
+
+
+
+spring MVC - requestScope 빈 주입
+
+@Configuration
+ - 해당 클래스가 Bean을 정의하는 클래스라고 Annotation을 통해 알려준다
+ @Bean                       
+ - Bytype : 클래스 이름이 name이 된다.
+
+@Bean("requestBean2") 
+ - Byname : requestBean2 가 이름이 된다.
+
+@RequestScope
+ - 이 Bean이 주입되는 시점을 나타내는 스코프, 새로운 요청(URL)이 발생했을 때 이 메서드가 호출된다.

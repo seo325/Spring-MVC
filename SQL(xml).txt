@@ -1,0 +1,57 @@
+spring 
+<MyBatis <sql> <include> 정리
+
+sql 태그에 id를 주어 DML 삽입 
+sub sql 조각을 <include> 태그 사용 
+<include>태그에서 <property>를 통해 <sql>태그로 파라미터를 넘길 수 있다.
+
+sqlInsert 
+keyProperty: selectKey구문의 결과가 셋팅될 대상 프로퍼티
+resultType: 결과의 타입. 마이바티스는 이 기능을 제거할 수 있지만 추가하는게 문제가 되지는 않을것이다. 마이바티스는 String을 포함하여 키로 사용될 수 있는 간단한 타입을 허용한다.
+
+
+parameterType : parameterType 속성을 사용해서 string 값의 파라미터가 들어올
+resultType
+
+
+ex)
+
+ <select id="getNewsList" resultType="com.stock.domain.StockNewsVO" parameterType="string">
+    select * from stock_news where replace(news_company,' ','') LIKE #{stk_nm}
+    </select>
+
+resultType : select 된 데이터를 반환할 (그릇)을 정해주는것 위의 코드같은경우엔 StockNewsVO 객체에 담긴다
+parameterType : 자바에서 String 값이 들어올거란걸 인지시켜주고 , 쿼리에서 자바에서 보낸 stk_nm을 사용한다
+
+
+ -------------------------------------------------------------------------------------------------------------------------
+resultType=" casemap 이라는 곳에 담는다
+parameterMap : 비즈니스 로직으로부터 전달 받은, SQL 구문에 사용될 매개변수를 담은 객체
+parameterType : 비즈니스 로직으로부터 전달 받은, SQL 구문에 사용될 매개변수의 자료형
+resultMap : 비즈니스 로직으로 반환할, 결과값을 담은 객체
+resultType : 비즈니스 로직으로 반환할, 결과값의 자료형
+
+selectkey insert 이전 값 조회 
+
+
+enum : 열거형으로 표현
+
+
+------------------------------------------------------------------------------------------------------------
+svn  
+checkout - 원격저장소의 파일 -> 로컬 저장소로 내려받음 
+update - 로컬 파일을 repository 랑 비교하여 최신버전으로 갱신 
+commit - 로컬 파일의 변경을 Repository 저장 
+<이클립스>
+Synchronize with Repository(동기화)
+-서버에 있는 소스와 로컬 소스의 싱크를 맞춥니다.
+Commit
+-서버로 나의 로컬 소스를 올리는 작업입니다.
+Update
+-서버의 소스를 나의 로컬로 옮기는 작업입니다.
+
+ 
+
+
+
+

@@ -1,0 +1,86 @@
+#Spring MVC - 쿼리 파라미터(Parameter) 전달
+
+
+1.HttpServletRequest을 이용한 요청 파라미터 조회
+2.@RequestParam을 이용한 요청 파라미터 조회
+3.Map, MultiValueMap을 이용한 요청 파라미터 조회
+4.@ModelAttribute을 이용한 쿼리 파라미터 조회
+ 
+
+
+1)HttpServletRequest 
+
+@Slf4j
+@RestController
+public class RequestParamController {
+
+    @GetMapping("/request-param-v1")
+    public void requestParamV1(HttpServletRequest request, HttpServletResponse response) throws IOException, IOException {
+        String username = request.getParameter("username");
+        int age = Integer.parseInt(request.getParameter("age"));
+        log.info("username={}, age={}", username, age);
+        response.getWriter().write("ok");
+    }
+
+}
+
+2 RequestParam 을 이용한 요청 파라미터 조회
+@Slf4j
+@RestController
+public class RequestParamController {
+
+    @GetMapping("/request-param-v2")
+    public String requestParamV2(
+            @RequestParam("username") String memberName,
+            @RequestParam("age") int memberAge) {
+        log.info("username={}, age={}", memberName, memberAge);
+        return "ok";
+    }
+
+}
+
+3) Map, List, MultiValueMap을 이용한 요청 파라미터 조회
+@Slf4j
+@RestController
+public class RequestParamController {
+
+    @GetMapping("/request-param-map")
+    public String requestParamMap(@RequestParam Map<String, Object> paramMap) {
+        log.info("username={}, age={}", paramMap.get("username"), paramMap.get("age"));
+        return "ok";
+    }
+
+    @GetMapping("/request-param-list")
+    public String requestParamList(@RequestParam List<String> username) {
+        for (String s : username) {
+            log.info("username={}", s);
+        }
+        return "ok";
+    }
+
+    @GetMapping("/request-param-multimap")
+    public String requestParamMultiValueMap(@RequestParam MultiValueMap<String, Object> paramMap) {
+        log.info("username={}, age={}", paramMap.get("username"), paramMap.get("age"));
+        return "ok";
+    }
+}
+
+4. ModelAttribute 를 이용한 Parameter 넘기기
+@Data
+public class UserData {
+	private String username;
+	private int age;
+}
+
+
+@Slf4j
+@RestController
+public class RequestParamController {
+
+    @GetMapping("/model-attribute-v1")
+    public String modelAttributeV1(@ModelAttribute UserData userData) {
+    
+        log.info("username={}, age={}", userData.getUsername(), userData.getAge());
+        return "ok";
+    }
+}

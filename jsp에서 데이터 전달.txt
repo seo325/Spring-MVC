@@ -1,0 +1,115 @@
+- jsp에서 데이터 전달 방법
+1.param
+2.HttpSevletRequest
+3.Model
+4. ModelAndView
+
+
+1) param 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<a href='test1?data1=100&data2=200'>test1</a><br/>
+    
+</body>
+</html>
+
+2 HttpSevletRequest
+@Controller
+public class testController {
+
+	@GetMapping("/test2")
+	public String test2(HttpServletRequest request) {
+		
+		request.setAttribute("data1", 100); // request 영역에 데이터를 저장할 수 있다
+		request.setAttribute("data2", 200);
+		
+		return "test2";
+	}
+}
+
+3 Model 객체 사용 (model에 넣어서 )
+@Controller
+public class testController {
+
+	@GetMapping("/test3")
+	public String test3(Model model) {
+		
+		model.addAttribute("data1", 300);
+		model.addAttribute("data2", 400);
+		
+		return "test3";
+	}
+}
+4 - ModelAndView 객체 사용
+@Controller
+public class testController {
+
+	@GetMapping("/test4")
+	public ModelAndView test4(ModelAndView mv) { // 데이터를 저장하기 위해 ModelAndView 주입 
+		mv.addObject("data1", 100); // addObject를 이용하여 데이터를 저장
+		mv.addObject("data2", 200);
+		
+		mv.setViewName("test4");
+		return mv;
+	}
+}
+
+-커맨드 객체 (Command Object)
+커맨드 객체는 HttpServletRequest 자동으로 담긴다 
+
+@Controller
+public class testController {
+
+	@PostMapping("/test1")
+	public String test1(DataBean bean) {
+		return "test1";
+	}
+}
+ -> jsp사용
+ <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>test1</h1>
+	<h3>${requestScope.dataBean.data1 }</h3>
+	<h3>${requestScope.dataBean.data2 }</h3>
+</body>
+</html>
+
+커맨드 이름 지정
+
+@Controller
+public class testController {
+	//이름을 지정해주면 해당이름으로 request에 담긴다. -> 지금 코드에서 testData로 담겨 있어
+	@PostMapping("/test2")
+	public String test1(@ModelAttribute("testData") DataBean bean) {
+		return "test2";
+	}
+}
+
+-> jsp 사용
+testData 라는 이름으로 사용중
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>test2</h1>
+	<h3>${requestScope.testData.data1 }</h3>
+	<h3>${requestScope.testData.data2 }</h3>
+</body>
+</html>
