@@ -1,0 +1,55 @@
+JSTL - c:forEach 리스트 합계구하기
+
+<c:set var = "total" value = "0" />
+
+<c:forEach var="result" items="${resultList}" varStatus="status">     
+
+<tr>
+
+<td>${result.num}<td>
+
+</tr>
+
+<c:set var= "total" value="${total + result.num}"/>
+
+</c:forEach>
+
+<c:out value="${total}"/>
+
+
+<c:choose>
+    <c:when test="${result.open_at eq '전체공개' or ( reqMngSttusCd eq 'S002' and modifiCheck eq 1 )}">
+        <c:if test="${!empty uploadCbfileList}">
+        <c:set var = "total" value = "0" />
+            <c:forEach var="item" items="${uploadCbfileList}" varStatus="st">     
+                <tr>
+                    <td class="txt-ac">${item.wbfimyeong}</td>
+                    <td class="txt-ac">${item.wbfimyeong}</td>
+                    <td class="txt-ac">${item.wbfimyeong}</td>
+                    <td class="txt-ac" hidden ="hidden">${item.DWNLD_CNT}</td>
+                    <td class="txt-ac">
+                        <button type="button" class="btn_preview">미리보기</button>
+                    </td>
+                    <td class="txt-ac">
+                        <button type="button" data-filename="/file/download?path=${item.figyeongro}&sunbeon=${item.sunbeon}&name=${item.wbfimyeong}&tname=${item.fimyeong}" class="btn_download">다운로드</button>
+                    </td>
+                </tr>
+                <c:set var= "total" value="${total + item.DWNLD_CNT}"/>
+                </c:forEach>
+            
+        </c:if>
+    </c:when>
+    <c:when test="${result.open_at eq '부분공개' and ( modifiCheck ne 1 and reqMngSttusCd ne 'S002')}">
+        <tr>
+            <td class="txt-ac" colspan="5">미리보기가 지원되지 않습니다.
+                <button type="button" id="openReqBtn" class="btn-in line ml-0">공개신청하기</button>
+            </td>
+        </tr>
+    </c:when>
+</c:choose>
+<c:if test="${ empty uploadCbfileList }">
+    <tr>
+        <td class="txt-ac" colspan="5">첨부된 파일이 없습니다</td>
+    </tr>
+</c:if>
+</tbody>

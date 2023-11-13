@@ -1,0 +1,19 @@
+# java / spring boot 
+    @RequestParam vs @PathVariable
+    
+    두 어노테이션은 http 비연결성을 극복하고 , 데이터를 전달하기 위한 방법 , uri 를 통해 전달된 값을 파라미터로 받아오는 역할
+
+    uri 방식 - http://localhost:8080/book/1
+             - http://localhost:8080/book?page=1&listSize=10
+
+    RequestParam 사용
+        - @RequestParam(value ="page", required = false ,defaultValue ="1") int page ,
+          @RequestParam(value ="listSize", required = false ,defaultValue ="10") int listSize 
+
+      required = true 면 필수값으로 없으면 에러
+      defaultValue = 기본값으로 사용     
+
+    정리 및 요약
+    1.   @RequestParam과  @PathVariable 둘 다 데이터를 받아오는데 사용 
+    2.   @PathVariable은 값을 하나만 @RequestParam은 여러개 데이터를 받아올떄 사용
+    

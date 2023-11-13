@@ -1,0 +1,18 @@
+https://velog.io/@kwg527/JS-%ED%95%84%ED%84%B0-%EC%82%AC%EC%9A%A9%ED%95%B4%EB%B3%B4%EA%B8%B0 [javascript 검색기능]
+
+
+, b.UPDT_DTTM , '%Y-%m-%d') as   UPDT_DTTM 
+
+
+b.UPDT_DTTM  as   UPDT_DTTM
+
+
+
+				<span class="label_type label_type__date"><c:out value="${fnc:convertDateFormat(result.updtDttm, 'yyyy-MM-dd HH:mm:ss', 'yyyy.MM.dd')}" /></span>
+
+
+
+rsrcTypeCdArr
+openAtArr
+bioCodeArr
+keywordArr
